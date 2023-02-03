@@ -1,0 +1,32 @@
+
+ #Formulaires{
+
+   padding: 100px;
+   border: 5px ridge #E6DEDE;
+ border-radius: 12px;
+   margin:100px  200px 200px 100px;
+   background-color:rgb(230, 222,222);
+   
+ }
+ h1{
+  text-align:center;
+ }
+ #create-compte{
+   margin-top:10px;
+ display: none;
+ }
+ #btnconex{
+   
+   margin:center;
+ }
+ .containerbtn{
+   display: flex;
+   justify-content:center;
+ }
+
+ h1{
+   margin-bottom: 20px;
+ }
+ #signIn{
+   margin-bottom:42.4vh;
+ }

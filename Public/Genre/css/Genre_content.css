@@ -1,0 +1,14 @@
+#Genre-ln {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+#Genre-ln:hover{
+  transform: scale(1.07);
+  transition: 0.3s ease-out;
+
+
+}
+
+

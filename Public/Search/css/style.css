@@ -1,0 +1,37 @@
+#Search-bar{
+
+display: flex;
+   justify-content:center;
+   align-items: center;
+margin-bottom:10vh;
+
+}
+
+
+#title{ 
+margin-top: 22%;
+ margin-bottom: 29px;
+
+
+}
+.search{
+
+margin-bottom: 30px;
+
+}
+
+body{
+
+overflow-x: hidden;
+width: 100%;
+
+
+}
+#book-list{
+
+display: inline-flex;
+flex-wrap: wrap;
+margin: 0px 0px  0px 14px ;
+max-width: 100%;
+
+}
