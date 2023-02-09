@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Biblolib</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="Style/style.css" />
+    <link rel="stylesheet" href="Style/popup.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="Style/lightslider.css" />
+    <!-- js links -->
+    <script src="js/JQuery3.3.1.js"></script>
+    <script src="js/lightslider.js"></script>
+    <!-- favicon  -->
+    <link rel="stylesheet" href="Style/popup.css" />
+
+  </head>
+  <body>
+    <!-- nav bar  -->
+    <nav>
+      <!-- logo -->
+      <a href="#" class="logo">
+        <img src="logobib.png" />
+      </a>
+      <!-- menu  -->
+      <ul class="menu">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Genres</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">SIGN in </a></li>
+      </ul>
+  
+    </nav>
+    <br />
+    <br />
+    <br />
+    <section id="main">
+      <!-- APP -->
+      <h1 class="showcase_heading">Bookstore Online</h1>
+
+      <ul id="autoWidth" class="cs-hidden">
+        <!-- box 1 ------------------------------>
+        <li class="item-a">
+          <!-- showcase_box -->
+          <div class="showcase_box">
+            <a href="https://openlibrary.org/" target="_blank">
+              <img
+                src="6c86905bf64a9e7298313be8153a70ea.png"
+                alt="openlibrary"
+                class="size"
+              />
+            </a>
+          </div>
+        </li>
+        <li class="item-a">
+          <!-- showcase_box -->
+          <div class="showcase_box">
+            <a
+              href="https://www.amazon.com/books-used-books-textbooks/b?ie=UTF8&node=283155"
+              target="_blank"
+            >
+              <img src="amazon_logo.jpg" alt="amazon" class="size" />
+            </a>
+          </div>
+        </li>
+
+        <li class="item-a">
+          <!-- showcase_box -->
+          <div class="showcase_box">
+            <a href="https://www.fnac.com/e59444/Books" target="_blank">
+              <img src="logo-fnac.png" alt="Youtube" />
+            </a>
+          </div>
+        </li>
+        <li class="item-a">
+          <!-- showcase_box -->
+          <div class="showcase_box">
+            <a
+              href="https://books.google.fr/"
+              target="_blank"
+            >
+              <img
+                src="play-books-dark-theme-cover.png"
+                alt="google"
+                class="size"
+              />
+            </a>
+          </div>
+        </li>
+      </ul>
+    </section>
+    <!-- latest app https://openlibrary.org/  -->
+    <section id="latest">
+      <h2 class="latest_heading">TOP SELLER BOOKS 2021</h2>
+      <!-- ------------------------ container  -->
+      <div class="container"></div>
+      <!-- ------------------------------------------------ popup  -->
+      <button id="open" onclick="myLobi()">trust</button>
+      <div  id="modals_container" class="modal-container" >
+        <div class="modal">
+          <h1>La boite a merveille <br> <h3>Authors : Ahmed sefroui  </h3> </h1>
+        
+          
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea
+            blanditiis recusandae fugit dolorem ex voluptate maiores facere
+            eaque laborum alias!
+          </p>
+          <input type="text" id="input"> <br>
+          <button id="meclose">Close me</button>
+        </div>
+      </div>
+    </section>
+    <section id="latest">
+        <h2 class="latest_heading">TRENDS</h2>
+    <div class="footer">
+      <div class="tab">
+        <a href="#"><i class="fa fa-facebook"></i></a>
+        <a href="#"><i class="fa fa-instagram"></i></a>
+        <a href="#"><i class="fa fa-youtube"></i></a>
+        <a href="#"><i class="fa fa-twitter"></i></a>
+      </div>
+      <div class="tab">
+        <ul>
+          <li><a href="#">Contact us</a></li>
+          <li><a href="#">3il ingenieur </a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms & Conditions</a></li>
+          <li><a href="#">Github</a></li>
+        </ul>
+      </div>
+      <div class="tab">Copyright © 2021 - All rights</div>
+    </div>
+
+        <!-- ------------------------ container  -->
+    <script>
+      $(document).ready(function () {
+        $("#autoWidth,#autoWidth2").lightSlider({
+          autoWidth: true,
+          loop: true,
+          onSliderLoad: function () {
+            $("#autoWidth,#autoWidth2").removeClass("cS-hidden");
+          },
+        });
+      });
+
+      // popup animation
+
+      //------------------------------------------------------------------------------------------------
+
+      const key = "n6RRK59oCG9F0PA8u0fG2vNvEuILEE9Z";
+      const api_url = `https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=${key}`;
+
+      const getBooks = async () => {
+        const response = await fetch(api_url);
+
+        const data = await response.json();
+               console.log(data);
+        console.log(data.results);
+        return data; //api 
+ 
+      };
+
+      async function renderBooks() {
+        let y = await getBooks();
+        let html = "";
+        y.results.books.forEach(api => {
+          let htmlSegmenet = `<ul id="autoWidth2" class="cs-hidden"> <li > <div class="latest_box"> <div class="latest_b_img">  <a href="#" "> <img src=${api.book_image} alt=${api.title} /> </a></div>   <div class="latest_b_text"> <strong> ${api.title} </strong>  <p>${y.results.list_name} </p> </div> </div> </li> </ul>`;
+          html += htmlSegmenet;
+        });
+
+        let container = document.querySelector(".container");
+        container.innerHTML = html;
+      }
+
+      renderBooks();
+    </script>
+  </body>
+</html>

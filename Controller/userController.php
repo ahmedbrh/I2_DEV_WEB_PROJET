@@ -1,5 +1,4 @@
 
-<!-- contient des fonctions qui permettent d'afficher une page précise -->
 <?php
 	include "./Model/DataBase.php";
 	
@@ -9,6 +8,7 @@
         include "View/Accueil/content.php"; 
     } 
 function afficheLogin(){
+    
 		$titre = "SignIn";
         include "View/SignIn/content.php"; 
     }

@@ -7,7 +7,10 @@
   text-transform: uppercase;
   font-size: 1.5rem;
   color: #1a1a11;
- background-color: rgba(151, 151, 151, 0.03);
+ 
+
+
+background-color: rgba(151, 151, 151, 0.03);
 
 }
 
@@ -98,7 +101,7 @@ body {
 ul {
   list-style: none;
 }
-
+/* footer mashi muhim daba  */
 .container {
   /* display: flex;
   align-items: stretch; */
@@ -122,7 +125,7 @@ Align vertically */
   align-items: flex-start;
   flex-wrap: wrap;
 }
-.audio-heading h1 {
+.trend-heading h1 {
   margin-bottom: 30px;
   padding: 6px 20px;
 
@@ -136,12 +139,12 @@ Align vertically */
   font-size: 20.8px;
   letter-spacing: 1px;
 }
-.audio-heading {
+.trend-heading {
   display: flex;
   margin: 0px 2%;
 }
 
-.audio-box {
+.trend-box {
   width: 300px;
   display: flex;
   justify-content: space-between;
@@ -157,23 +160,23 @@ Align vertically */
   border-top: 1px solid #292929;
 }
 
-.audio-img {
+.trend-img {
   width: 100%;
   height: 400px;
   position: relative;
 }
 
-.audio-img img {
+.trend-img img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.audio-box a {
+.trend-box a {
   text-align: center;
   display: block;
   font-weight: 600;
-  /* display: -webkit-box; */
+  display: -webkit-box;
   max-width: 80;
   /* -webkit-line-clamp: vertical; */
   overflow: hidden;
@@ -181,89 +184,14 @@ Align vertically */
   color: #3a3a3a;
   margin: 20px;
 }
-.audio-box:hover {
+.trend-box:hover {
   transform: scale(1.06);
   transition: all ease 0.4s;
 }
-#audio-list {
+#trend-list {
   display: flex;
   /* justify-content: start; */
   align-items: flex-start;
   flex-wrap: wrap;
   width: 100%;
 }
-
-
-
-@media(max-width: 689px){ 
-
-
-
-
-.latest-box{
-   
-
-   width: 190px;
-margin:20px 5px;
-
-}
-
-.showcase_box {
-
-max-width: 280px;
-height: 180px;
-margin: 10px;
-
-
-
-} 
-
-.audio-box {
-
-  flex-direction:row ; 
-  width: 90%;
-  border :1px solid solid rgba(0, 0, 0, 0.2);
-
-}
-
-.audio-box a {
-
-width: 65%;
-
-}
-
-
-/* 
-@media(max-width: 1000px){ 
-
-
-.trend-box {
-margin-left: 22%;
-display: inline;
-justify-content: center; 
-  align-items: center; 
-
-}
-
- } */
-
- @media(max-width: 440px){ 
- .audio-box a ,.audio-box{
-
-width: 100%;
-
- }
-  .audio-box { 
-
-flex-direction: column;
-
-
-  }
-
- 
- 
- }
-
-}
-
-
