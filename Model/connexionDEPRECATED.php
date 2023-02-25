@@ -1,25 +1,23 @@
 <!-- connexion à base de donnée classique -->
 <?php 
-session_start();
+require "./user.php";
+
 if (isset($_POST['connexion'])) {
 	
 	$email=$_POST['email1'];
 	$password=$_POST['password1'];
-
+  
 	if($email&&$password){
 
-	$password=md5($password);
-
-	$connect=mysqli_connect('localhost','root','','porjetweb');
-
-	$query= mysqli_query($connect,"SELECT * FROM utilisateur WHERE adresseMail='$email' AND motdepasse='$password'");
-
-	$rows=mysqli_num_rows($query);
-
-
-	if ($rows==1) {
-
-		$query1= mysqli_query($connect,"SELECT * FROM utilisateur WHERE adresseMail='$email' AND motdepasse='$password'");
+	$user = new User();
+  $user = $user->get_user($email);
+	if (count($user)==1) {
+    $salt = getenv('salt');
+    if (password_verify($password.$salt, $user[0]["usr_password"])) {
+        echo "Password is valid!";
+    } else {
+        echo "Invalid password.";
+    }
 				
 		while($row = mysqli_fetch_array($query1)){
 			$result = $row['nom'];

@@ -1,7 +1,7 @@
 <!-- si la session utilisateur n'est pas definie on redirige vers la page d'inscription -->
 <!-- si la session utilisateur est définie, si le formulaire d'ajout commentaire est envoyer, alors on envoi une requete à la base de donnée pour insérer un commentaire -->
 <?php
-session_start();
+
 if(isset($_SESSION['utilisateur'])){
 	
 

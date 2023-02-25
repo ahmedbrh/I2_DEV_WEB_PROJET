@@ -1,22 +1,14 @@
-/*
-#tt{
-  padding-top: -594px;
-  
+#Genre-ln {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
 }
-.container{
-  position: relative;
-  margin-left: 50%;
-  margin-bottom: 150px;
-  margin-top: 150px;
-  
-}
-.liste{
+
+#Genre-ln:hover{
+  transform: scale(1.07);
+  transition: 0.3s ease-out;
+
 
 }
-.genres{
-  margin-bottom:100px;
-}
-*/
-
 
 
