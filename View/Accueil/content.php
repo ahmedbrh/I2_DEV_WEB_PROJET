@@ -167,20 +167,14 @@
      });  
    });  </script>
   
-    <?php 
-    $img  = $_POST['img'];
-    $img = explode( ',', $img );
-
-if(strlen(base64_decode( $img[1]))>1000){
-$directory = "cons/";
-$filecount = count(glob($directory . "*"));
-   $file = fopen("cons/".$filecount.".jpg","wb");
-   echo fwrite($file,base64_decode( $img[1]));
-   fclose($file);
-}
-?>
+   
    </body>
  
  
  
    </html>
+<style>
+  #footer{
+    position:relative;
+  }
+</style>

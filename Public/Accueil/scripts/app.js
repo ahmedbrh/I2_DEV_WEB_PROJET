@@ -74,5 +74,5 @@ async function renderBooks() {
 //DOMContentLoaded est émis lorsque le document HTML initial a été complètement chargé et analysé sans attendre que le css , images etc  aient terminé de charger.
 document.addEventListener("DOMContentLoaded",  ()=> {
   renderBooks(); 
-
+  
 });

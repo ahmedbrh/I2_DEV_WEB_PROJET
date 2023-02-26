@@ -17,7 +17,7 @@ if(x%2==0){
     $("#result").html('');
     var values = ($(this).serialize());
        $.post("?page=logging",values).done(()=>{
-         window.location.href="/";
+         window.location.href="/?page=logging";
        });
   });
 
@@ -29,7 +29,7 @@ if(x%2==0){
     var values = ($(this).serialize());
 
        $.post("?page=logging",values).done(()=>{
-         window.location.href="/";
+         window.location.href="/?page=logging";
        });
     
 

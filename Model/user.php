@@ -15,7 +15,7 @@ class User extends Database{
   }
 
   public function get_user($adressemail) {
-    $sql = "SELECT * from users where usr_mail='".$adressemail."'"; //ptdrr qui a ecris ca, c'est une faille sql pure et dure -youness
+    $sql = "SELECT * from users where usr_mail='".$adressemail."'"; //c'est une faille sql pure et dure -youness
     return $this->select($sql);
   }
 
@@ -25,21 +25,18 @@ class User extends Database{
     if (count($user)==1) {
       $salt = getenv('salt');
       if (password_verify($pass.$salt, $user[0]["usr_password"])) {
+          setcookie("connected","true");
           echo "Password is valid!";
       } else {
           $error=True;
           echo "Invalid password.";
       }
-				
 
-	   //session_start();
-		//$_SESSION['utilisateur']=$result;
-		//header('Location:../index.php');	
-		return !$error;
+    if(!$error){
+		  return $user[0]["usr_nom"];
+    }else{
+      return null;
+    }
 	}
-    //if($error==False){
-      //session_start();
-      //$_SESSION["sessID"] = session_id();
-    //}
   }
 }

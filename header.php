@@ -40,7 +40,11 @@
 <li><a href="?page=genre">Genres </a></li>
 <li> <a href="?page=search">Search </a></li>
 <li><a href="View/AboutUs/aboutus.php">About us </a></li>
-<li><a href="?page=logging">Sign in </a></li>
+<?php 
+if ( !isset( $_SESSION['user'] )) {
+  echo '<li><a href="?page=logging">Sign in </a></li>';
+  }
+?>
 
 </ul>
 
@@ -48,11 +52,13 @@
 
         <?php 
         if(isset($_SESSION['user'])) {
+          
 echo 
+  
 "
 <div style='display:flex; align-items:center;'>
   <img src='https://pbs.twimg.com/profile_images/911523367492161536/XDOQPjqf_400x400.jpg' style='border-radius:50%;' width='50px' height='50px' id='avatar'/>
-  <h3 style='font-weight:100;'>Welcome </h3><h2 style='font-size:25px;'>".$_SESSION['utilisateur']."</h2>
+  <h3 style='font-weight:100;'>Welcome &nbsp </h3> </br><h2 style='font-size:25px;'> "     .$_SESSION['user']."</h2>
   </br>&nbsp&nbsp 
   <form id='decform' method='post'><input name='deconnexion' style='display:none' value='lol'> <button type='submit' id='deconnexion' class='deconnex'>Se déconnecter</button> </form>
   <i style='font-size:25px; color:#E54A4A; margin-left:5px;' class='fa fa-sign-out' aria-hidden='true'></i>

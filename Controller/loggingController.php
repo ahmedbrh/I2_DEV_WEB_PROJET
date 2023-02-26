@@ -31,14 +31,13 @@ class LoggingController {
       $pass= $_POST['password1'];
       require_once( "Model/user.php" );
       $userModel = new User();
-      $connected = $userModel->connect_user($mail, $pass); // return session id, put it in cookies to log user
-      if($connected){
-        $_SESSION["user"] = $mail;
+      $username = $userModel->connect_user($mail, $pass); // returns username
+      if(isset($username)){
+        $_SESSION["user"] = $username;
       }
     }
    
     if(isset($_POST["deconnexion"])){
-       echo "loooooooool";
       session_destroy();
     }
     

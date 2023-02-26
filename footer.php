@@ -3,7 +3,7 @@
 	<link href="footer.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-<div class="footer">
+<div class="footer" id="footer">
 <div class="social-icons">
 <a href="https://books.google.fr/"><i class="fa fa-google"></i></a>
 <a href="https://www.amazon.com/books-used-books-textbooks/b?ie=UTF8&node=283155"><i class="fa fa-amazon"></i></a>
