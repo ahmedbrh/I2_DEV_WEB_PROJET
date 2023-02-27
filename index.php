@@ -33,10 +33,15 @@
       -->
 		<?php
   $route = "accueil";
+  $action = "";
   if(isset($_SERVER["REQUEST_METHOD"])){
+
     if(isset($_GET["page"])){
 		  $route = $_GET["page"];
 	   }
+    if(isset($_GET["action"])){
+      $action = $_GET["action"];
+    }
   }
 	
 	switch($route)
@@ -45,6 +50,10 @@
 			include "Controller/userController.php";
 			afficheAccueil();
 			break;
+    case "profil":
+      include "Controller/profilController.php";
+      afficherProfile();
+      break;
 		case "logging" :
       if (isset($_SESSION["user"]) && !isset($_POST["deconnexion"])){
         include "Controller/userController.php";
@@ -66,7 +75,6 @@
 	  case "search":
 		include  "Controller/userController.php";
 		 afficherSearch();
-		 
 		 break;
 	}
 	?>

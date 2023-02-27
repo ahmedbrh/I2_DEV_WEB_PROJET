@@ -30,16 +30,16 @@ abstract class Database{
       }
     }
 
-  public function insert($sql){
-    $stmt = $this->_connexion->prepare($sql);
+  public function insert($sql, $parametres){ 
+    $stmt = $this->_connexion->prepare($sql); 
     // execute the insert statement
-    $stmt->execute();
+    $stmt->execute($parametres);
+  
   }
 
-  public function select($sql) {
+  public function select($sql, $parametres) {
     $stmt = $this->_connexion->prepare($sql);
-    // execute the select statement
-    $stmt->execute();
+    $stmt->execute($parametres);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 }

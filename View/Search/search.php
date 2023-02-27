@@ -6,10 +6,10 @@
     <title>Document</title>
     <link href="Public/Accueil/css/Accueil_content.css" rel="stylesheet" type="text/css" />
 <link href="Public/Search/css/style.css"  rel="stylesheet"  type="text/css" />
-    
+<!--     
 <Script src="Public\Search\scripts\index.js"></Script>
-   
-
+    -->
+    <Script src="Public\Search\scripts\searchApi.js"></Script>
 </head>
 <body>
     
@@ -45,11 +45,9 @@
           />
         </div>
     
-        <button type="submit" class="btn btn-secondary   btn-block py-2.5 mb-4" onclick="renderBooks() ;
-">
-          Search
-        </button>
-  
+
+
+ <input  id="enter" type = "button"  value = "submit">
     </div>
   
 </div>

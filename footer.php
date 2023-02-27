@@ -22,7 +22,7 @@
 </div>
 
 <div class="copyright">
- Copyright © 2021 - All rights 
+ Copyright <?php  echo "20".date("y");?> - All rights 
 </div>
 </div>
 </body>

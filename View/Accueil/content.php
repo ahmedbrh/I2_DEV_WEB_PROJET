@@ -149,7 +149,10 @@
          
          </div>
          <div class="popup">
-      <?php include "View/Popup/popup.php" ?>
+      <?php include "Controller/popupController.php";
+      $popupController = new Popupcontroller();
+      $popupController->renderPopup();
+?>
       </div>
  
 
@@ -175,6 +178,6 @@
    </html>
 <style>
   #footer{
-    position:relative;
+    position:relative!important;
   }
 </style>

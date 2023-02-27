@@ -9,7 +9,6 @@
   </head>
 
 <body>
-
 <h1> Sign in </h1>
 <div id="signIn">
 <!--Creation du premier formulaire de connexion en utilisant bootstrap-->

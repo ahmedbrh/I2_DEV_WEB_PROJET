@@ -13,6 +13,7 @@ if(x%2==0){
 
 
   $("#create-compte").submit(function(event) {
+    e.preventDefault();
     var ajaxRequest;
     $("#result").html('');
     var values = ($(this).serialize());
@@ -24,6 +25,7 @@ if(x%2==0){
 
 
   $("#Formulaire-connexion").submit(function(event) {
+    e.preventDefault();
     var ajaxRequest;
     $("#result").html('');
     var values = ($(this).serialize());

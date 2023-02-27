@@ -1,4 +1,5 @@
 <?php
+require_once("Model/user.php");
 class LoggingController {
   function __construct(){
     $titre = "SignIn";
@@ -11,17 +12,21 @@ class LoggingController {
       $passconf = $_POST['passwordconf'];
       $error = False;
       if($pass != $passconf){
-        $error=True;
+        $error = True;
+        echo "<div class='alert alert-danger' role='alert'>Les mots de passe ne sont pas identique</div>";
       }
-      //si l'adresse mail mal formattée $error = true
-      
+      $user = new User;
+      if (count($user->get_user($adressemail))>0) {
+        $error = True;
+          echo "<div class='alert alert-danger' role='alert'>Cette adresse mail est déjà utilisée</div>";
+        }
       if($error==False){
         require_once( "Model/user.php" );
         $userModel = new User(); 
         $userModel->create_user($mail,$pass,$username);
-      }
-      if($error == True){
-        echo "ERREUR FATALE INSCRIPTION ECHOUEE";
+        if(isset($username)){
+          $_SESSION["user"] = $username;
+        }
       }
       
     }

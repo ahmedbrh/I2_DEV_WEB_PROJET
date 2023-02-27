@@ -54,7 +54,7 @@ color: #585858;
 }
 
 .username i {
-  color: #585858;
+  color: #ffffff;
 }
 
 nav .menu li a:hover {
@@ -212,3 +212,45 @@ height: 5rem;
  
  }
 
+.deconnex {
+padding:10px;
+background: #646464;
+
+color: #fff;
+border: 1px solid #eee;
+
+text-shadow:none;
+  .fa-sign-out{
+    color:#fff;
+  }
+}
+
+.deconnex:hover {
+
+background: #ed1e28a6;
+transition:0.2s;
+color: #fff;
+
+border: 1px solid #ed1e28a6;
+
+border-radius: 10px;
+
+box-shadow: 5px 5px 5px #383838;
+
+text-shadow:none;
+}
+
+.header_connect{
+  padding-left:150px;
+}
+.user_name{
+  margin-top:-20px;
+  margin-left:5px;
+  font-family:Helvetica Neue;
+  font-size:medium;
+  font-weight:bold;
+}
+.profile_link{
+  cursor:pointer;
+  
+}

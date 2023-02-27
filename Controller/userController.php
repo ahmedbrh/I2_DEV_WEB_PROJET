@@ -21,7 +21,7 @@ function afficherSearch(){
 	$titre="search";
 	include  "View/Search/search.php";
   }
-function afficheAboutus(){
+function afficherAboutus(){
 	$titre="about";
 	include "View/AboutUs/aboutus.php";
 }

@@ -25,7 +25,7 @@ const getBooks = async () => {
 // un Livre a pour attributs: image, title, ISBN,desc , author 
 // la fonction handleclick s'éxecute quand on clique sur un livre en lui passant plusieurs parametres 
 const handleclick=(isbn,title,img,auth,desc,link,link2)=>{
-
+  
 let popupTitle=document.getElementById('titlePop');
 let popupImage=document.getElementById('imgPop')
 let overlay=document.getElementsByClassName('overlay')[0]
@@ -36,10 +36,10 @@ let author=document.getElementById('authors');
 let links=document.getElementById('links');
 let links2=document.getElementById('links2');
 let idlivre=document.getElementById('isbn');
-let idlivre2=document.getElementById('isbn2');
-
+$.post("/Services/commentaires.php?action=getReplies",{isbn:isbn+""}).done((d)=>{
+    commentaires.innerHTML = d;
+  });
 idlivre.value=isbn;
-idlivre2.value=isbn;
 
 console.log(idlivre.value);
 // fonction qui met les infos du livre dans popup
