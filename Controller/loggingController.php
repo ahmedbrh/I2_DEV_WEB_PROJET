@@ -4,8 +4,17 @@ class LoggingController {
   function __construct(){
     $titre = "SignIn";
     
+  
+      $this->handlePostInscription();
+      $this->handlePostConnexion();
+      $this->handlePostDeconnexion();
+
     
-    if(isset($_POST["inscription"])){
+   
+    
+  }
+  function handlePostInscription(){
+        if(isset($_POST["inscription"])){
       $username = $_POST['username'];
       $mail =$_POST['email2'];
       $pass = $_POST['password2'];
@@ -16,7 +25,8 @@ class LoggingController {
         echo "<div class='alert alert-danger' role='alert'>Les mots de passe ne sont pas identique</div>";
       }
       $user = new User;
-      if (count($user->get_user($adressemail))>0) {
+      $tmpUser = $user->get_user($mail);
+      if (count($tmpUser)>0) {
         $error = True;
           echo "<div class='alert alert-danger' role='alert'>Cette adresse mail est déjà utilisée</div>";
         }
@@ -27,10 +37,14 @@ class LoggingController {
         if(isset($username)){
           $_SESSION["user"] = $username;
         }
+      
       }
       
     }
-
+  }
+  
+  function handlePostConnexion(){
+    
     if(isset($_POST["connexion"]) ) {
       $mail =$_POST['email1'];
       $pass= $_POST['password1'];
@@ -39,15 +53,17 @@ class LoggingController {
       $username = $userModel->connect_user($mail, $pass); // returns username
       if(isset($username)){
         $_SESSION["user"] = $username;
+       
       }
     }
    
-    if(isset($_POST["deconnexion"])){
-      session_destroy();
-    }
-    
   }
 
+  function handlePostDeconnexion(){
+     if(isset($_POST["deconnexion"])){
+      session_destroy();
+    }
+  }
   function renderLogging(){
     include "View/SignIn/content.php"; 
   }

@@ -21,6 +21,7 @@
 
 	</head>
 	<body style='min-height:100vh'>
+
 		<header>
     <!-- le header reste fixe -->
 		<?php  include "header.php"  ?>
@@ -33,47 +34,45 @@
       -->
 		<?php
   $route = "accueil";
-  $action = "";
   if(isset($_SERVER["REQUEST_METHOD"])){
-
     if(isset($_GET["page"])){
 		  $route = $_GET["page"];
 	   }
-    if(isset($_GET["action"])){
-      $action = $_GET["action"];
-    }
+
   }
 	
 	switch($route)
 	{
 		case "accueil" : 
-			include "Controller/userController.php";
-			afficheAccueil();
+			require_once("Controller/homeController.php") ;
+			$homeController = new HomeController();
+      $homeController->renderHome();
 			break;
     case "profil":
-      include "Controller/profilController.php";
-      afficherProfile();
+       require_once("Controller/profilController.php");
+      $profilController = new ProfilController();
+      $profilController->renderProfil();
       break;
 		case "logging" :
       if (isset($_SESSION["user"]) && !isset($_POST["deconnexion"])){
-        include "Controller/userController.php";
+        require_once( "Controller/userController.php");
 			 afficheAccueil();
       }else{
-        include "Controller/loggingController.php";
+        require_once( "Controller/loggingController.php");
   			$logController = new LoggingController();
         $logController->renderLogging();
       }
 			break;
 		case "genre":
-			include "Controller/userController.php";
+			require_once( "Controller/userController.php");
 			afficheGenre();
       break;
     case "aboutus":
-			include "Controller/userController.php";
+			require_once( "Controller/userController.php");
 			afficheAboutus();
       break;
 	  case "search":
-		include  "Controller/userController.php";
+		require_once(  "Controller/userController.php");
 		 afficherSearch();
 		 break;
 	}

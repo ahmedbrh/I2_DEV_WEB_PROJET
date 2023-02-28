@@ -19,6 +19,7 @@ const closePopup = ()=>{
   popup.style.visibility='hidden';
   overlay.style.opacity='0';
   document.getElementById("commentaryArea").innerHTML="";
+  console.log("closeee popup");
   // window.location.href=""; a enlever pour essayer la bdd 
 }
 //

@@ -20,7 +20,7 @@ class User extends Database
     public function get_user($adressemail)
     {
         $sql = "SELECT * from users where usr_mail=:mail";
-        return $this->select($sql, ['mail' => $adressemail]);
+        return $this->select($sql, array('mail' => $adressemail));
     }
 
     public function get_user_by_id($id){

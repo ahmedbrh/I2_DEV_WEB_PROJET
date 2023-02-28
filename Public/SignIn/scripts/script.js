@@ -18,7 +18,8 @@ if(x%2==0){
     $("#result").html('');
     var values = ($(this).serialize());
        $.post("?page=logging",values).done(()=>{
-         window.location.href="/?page=logging";
+         console.log("connexion")
+         window.location.href="?page=accueil";
        });
   });
 
@@ -31,7 +32,7 @@ if(x%2==0){
     var values = ($(this).serialize());
 
        $.post("?page=logging",values).done(()=>{
-         window.location.href="/?page=logging";
+         window.location.href="?page=accueil";
        });
     
 
