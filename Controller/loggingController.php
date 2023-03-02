@@ -29,7 +29,7 @@ class LoggingController {
       if (count($tmpUser)>0) {
         $error = True;
           echo "<div class='alert alert-danger' role='alert'>Cette adresse mail est déjà utilisée</div>";
-        }
+      }
       if($error==False){
         require_once( "Model/user.php" );
         $userModel = new User(); 
@@ -50,10 +50,11 @@ class LoggingController {
       $pass= $_POST['password1'];
       require_once( "Model/user.php" );
       $userModel = new User();
-      $username = $userModel->connect_user($mail, $pass); // returns username
+      $username = $userModel->connect_user($mail, $pass); // returns username if null then mail or pass is invalid
       if(isset($username)){
         $_SESSION["user"] = $username;
-       
+      }else{
+         echo "<div class='alert alert-danger' role='alert'>Adresse email ou mot de passe invalide.</div>";
       }
     }
    

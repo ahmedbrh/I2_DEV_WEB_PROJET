@@ -45,23 +45,16 @@ class User extends Database
 
     public function connect_user($mail, $pass)
     {
-        $error = False;
+        //retourne l'username en cas de connexion avec succes
         $user = $this->get_user($mail);
         if (count($user) == 1) {
             $salt = getenv('salt');
             if (password_verify($pass . $salt, $user[0]["usr_password"])) {
-            } else {
-                $error = True;
-                echo "<div class='alert alert-danger' role='alert'>Le couple identifiant mot de passe est invalide !</div>";
-            }
-
-            if (!$error) {
-                return $user[0]["usr_nom"];
+              return $user[0]["usr_nom"];
             } else {
                 return null;
             }
-        } else {
-            echo "<div class='alert alert-danger' role='alert'>Le couple identifiant mot de passe est invalide !</div>";
         }
-    }
+        return null;
+    }  
 }

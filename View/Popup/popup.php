@@ -20,6 +20,7 @@
       <!--Image du livre -->
   <img id="imgPop" />
 
+
   <!--Image du livre -->
 
 
@@ -31,6 +32,12 @@
 <li id="description"></li>
 <li id="links"> </li>
 <li id="links2"></li>
+    <?php
+    if(isset($_SESSION["user"])){
+      echo "<input hidden type='checkbox' id='favorite'><label for='favorite'>&#9825;</label>";
+    }
+
+  ?>
 <ul>
 
 

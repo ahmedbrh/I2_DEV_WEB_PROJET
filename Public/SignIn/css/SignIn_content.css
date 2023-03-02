@@ -30,3 +30,10 @@
  #signIn{
    margin-bottom:42.4vh;
  }
+
+button[type="submit"]{
+  margin-top:10px;
+}
+.container{
+  margin-top:1%;
+}

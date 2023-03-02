@@ -65,13 +65,13 @@ popupImage.src=img;
 descriptionContent = $("<strong>Description: </strong>");
 spanDescriptionContent = $("<span></span>");
   spanDescriptionContent.text(desc);
-description.append(descriptionContent)
+description.html(descriptionContent)
   description.append(spanDescriptionContent)
 
   authorContent = $('<strong>Authors: </strong>');
   spanAuthorContent = $("<span></span>");
   spanAuthorContent.text(auth);
-  author.append(authorContent);
+  author.html(authorContent);
   author.append(spanAuthorContent);
   
 links.innerHTML= "  <strong> Buy now : </strong></br> <a id='link1' target='_blank'>Amazon <i class='fa fa-amazon'></i> </a>  " 
