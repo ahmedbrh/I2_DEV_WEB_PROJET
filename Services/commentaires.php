@@ -15,11 +15,11 @@ switch ($action){
   break;
   case "postReply":
 
-    if(isset($_POST["commentaire"]) && isset($_SESSION["user"]) && isset($_POST["isbn"])){
+    if(isset($_POST["commentaire"]) && isset($_SESSION["user"]) && isset($_POST["isbn"]) && isset($_POST["rate"])){
       chdir("../");
       require_once('Controller/popupController.php');
       $popupController = new PopupController();
-      $popupController->postReply($_POST["commentaire"], $_SESSION["user"], $_POST["isbn"]);
+      $popupController->postReply($_POST["commentaire"],$_POST["rate"], $_SESSION["user"], $_POST["isbn"]);
       
     }
   break;

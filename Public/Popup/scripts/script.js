@@ -34,13 +34,23 @@ overlay.addEventListener('click',(e)=>{
     closePopup();
 })
 
+function reinitializeCommentaryAndRate(){
+  document.getElementById("commentaire").value="";
+  document.querySelectorAll(".rating>input").forEach(r=>r.checked=false)
+}
+
   $("#replyForm").submit(function(event) {
-    console.log("looool ");
+
     event.preventDefault();
+    var rate = Object.values(document.querySelectorAll(".rating>input")).filter(c=>c.checked)[0];
+    var rate = rate?rate.id:1;
     let commentaires=document.getElementById('commentaryArea');
-       $.post("Services/commentaires.php?action=postReply",{commentaire: $("#commentaire").val(), isbn: $("#isbn").val()+""}).done(()=>{
+       $.post("Services/commentaires.php?action=postReply",{commentaire: $("#commentaire").val(), isbn: $("#isbn").val()+"", rate:rate}).done(()=>{
+                
+                  
                 $.post("/Services/commentaires.php?action=getReplies",{isbn:isbn.value+""}).done((d)=>{
             commentaires.innerHTML = d;
+                  reinitializeCommentaryAndRate();
           });
        });
     

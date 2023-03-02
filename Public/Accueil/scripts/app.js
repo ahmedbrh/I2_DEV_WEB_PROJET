@@ -13,8 +13,6 @@ const getBooks = async () => {
   const response = await fetch(api_url);
 // to make fetch call (promise call )
   const data = await response.json();
-  console.log(data);
-  console.log(data.results);
   return data; //api
 };
  

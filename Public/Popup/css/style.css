@@ -62,6 +62,7 @@ max-height:90vh;
 flex-direction:row;
   width:100%;
 }
+
 #commentaryArea{
   display: flex;
   flex-direction: column;
@@ -97,3 +98,77 @@ align-items:center;
 #informations{
 margin-left:-22px;
 }
+
+#replyForm{
+  display:flex;
+  flex-direction:column;
+  
+}
+#user-time{
+  line-height:5px;
+}
+.rate{
+
+	border-bottom-right-radius: 12px;
+	border-bottom-left-radius: 12px;
+
+}
+
+
+
+.rating {
+    display: flex;
+    flex-direction: row-reverse;
+  justify-content:flex-end;
+  margin-bottom:20px;
+  
+}
+
+.rating>input {
+    display: none;
+}
+
+.rating>label {
+    position: relative;
+    width: 1em;
+    font-size: 30px;
+    font-weight: 300;
+    color: #FFD600;
+    cursor: pointer;
+}
+
+.rating>label::before {
+    content: "\2605";
+    position: absolute;
+    opacity: 0;
+}
+
+
+.rating>label:hover:before,
+.rating>label:hover~label:before {
+    opacity: 1 !important;
+}
+
+.rating>input:checked~label:before {
+    opacity: 1;
+}
+
+.rating:hover>input:checked~label:before {
+    opacity: 0.4;
+}
+.reply-rating{
+  display:flex;
+  flex-direction:row;
+  justify-content:flex-start;
+}
+.reply-rating>label{
+      position: relative;
+    width: 1em;
+    font-size: 20px;
+    font-weight: 300;
+    color: black;
+  opacity:0.4;
+}
+
+
+
