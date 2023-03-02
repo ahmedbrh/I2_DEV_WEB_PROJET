@@ -24,20 +24,19 @@ const getBooks = async () => {
 // la fonction handleclick s'éxecute quand on clique sur un livre en lui passant plusieurs parametres 
 
 var currentIntervalId = "";
-
-const handleclick=(isbn,title,img,auth,desc,link,link2)=>{
-
-let popupTitle=document.getElementById('titlePop');
-let popupImage=document.getElementById('imgPop')
-let overlay=document.getElementsByClassName('overlay')[0]
-let popup=document.getElementsByClassName('popup')[0]
-let commentaires=document.getElementById('commentaryArea');
-let description=$('#description');
-let author=$('#authors');
-let links=document.getElementById('links');
-let links2=document.getElementById('links2');
-let idlivre=document.getElementById('isbn');
-  commentaires.innerHTML="";
+var spinnerLoadingHtml = '<div id="loading-replies"><div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div></div>'
+function handleclick(isbn,title,img,auth,desc,link,link2){
+var popupTitle=document.getElementById('titlePop');
+var popupImage=document.getElementById('imgPop')
+var overlay=document.getElementsByClassName('overlay')[0]
+var popup=document.getElementsByClassName('popup')[0]
+var description=$('#description');
+var author=$('#authors');
+var links=document.getElementById('links');
+var links2=document.getElementById('links2');
+var idlivre=document.getElementById('isbn');
+var commentaires=document.getElementById('commentaryArea');
+  commentaires.innerHTML=spinnerLoadingHtml;
   let closeBtn = document.getElementsByClassName('close')[0]
   closeBtn.addEventListener("click",(e)=>{
     clearInterval(currentIntervalId);

@@ -62,7 +62,13 @@ max-height:90vh;
 flex-direction:row;
   width:100%;
 }
-
+#loading-replies{
+     display: flex;
+    height: 100%;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
 #commentaryArea{
   display: flex;
   flex-direction: column;
