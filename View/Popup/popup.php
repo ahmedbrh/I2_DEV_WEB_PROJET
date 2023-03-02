@@ -6,11 +6,14 @@
 
 	<div id="popup_container">
   <!--Bouton fermer -->
-  	<button class="close" >&times;</button>
+    <div id="popup_header">
+  	
       <!--Bouton fermer -->
     <!--Titre du Livre -->
 
 		<h2 id="titlePop"></h2>
+      <button type="button" class="btn-close close" aria-label="Close"></button>
+    </div>
     <!--Titre du Livre -->
       
       <div id="midPop">
@@ -29,6 +32,10 @@
 <li id="links"> </li>
 <li id="links2"></li>
 <ul>
+<div class="spinner-border" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+
 </div>
 <br>
 
@@ -63,7 +70,7 @@ echo
     <textarea  id="commentaire" !name="commentaire" class="form-control" id="comment" rows="3"   style="resize: none;"></textarea>
   </div>
 <div class="rating"> <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label> <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label> <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label> <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label></div>
-<div><button type="submit" name="commenter" class="btn btn-primary">Submit a comment</button></div>
+<div><button type="submit" name="commenter" class="btn btn-dark">Submit a comment</button></div>
 
 <input id="valuePage" style="display:none" name="valuePage" value="'.$_GET['page'].'"></input>
 </form>

@@ -80,8 +80,12 @@ flex-direction:row;
 .commentaireHeader{
   line-height: 12px;
 }
-#titlePop{
+#popup_header{
+  display:flex;
   border-bottom:1px solid lightgray;
+  margin-bottom:10px;
+  justify-content:space-between;
+  align-items:baseline;
 }
 .date{
   font-size: 11px;

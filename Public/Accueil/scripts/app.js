@@ -32,8 +32,8 @@ let popupImage=document.getElementById('imgPop')
 let overlay=document.getElementsByClassName('overlay')[0]
 let popup=document.getElementsByClassName('popup')[0]
 let commentaires=document.getElementById('commentaryArea');
-let description=document.getElementById('description');
-let author=document.getElementById('authors');
+let description=$('#description');
+let author=$('#authors');
 let links=document.getElementById('links');
 let links2=document.getElementById('links2');
 let idlivre=document.getElementById('isbn');
@@ -61,10 +61,24 @@ console.log(idlivre.value);
 popup.style.visibility='visible';
 popupTitle.innerText=title;
 popupImage.src=img;
-description.innerHTML= "<strong> Description </strong> :"+desc;
-author.innerHTML="<h1> Author: "+auth+"</h1>";
-links.innerHTML= "  <strong> Buy now : </strong></br> <a href='"+link+"' target='_blank'>Amazon   <i class='fa fa-amazon'></i> </a>  " 
-links2.innerHTML= "<a href='"+link2+"' target='_blank'>Apple books <i class='fa fa-apple'></i></a>   " 
+
+  
+descriptionContent = $("<strong>Description: </strong>");
+spanDescriptionContent = $("<span></span>");
+  spanDescriptionContent.text(desc);
+description.append(descriptionContent)
+  description.append(spanDescriptionContent)
+
+  authorContent = $('<strong>Authors: </strong>');
+  spanAuthorContent = $("<span></span>");
+  spanAuthorContent.text(auth);
+  author.append(authorContent);
+  author.append(spanAuthorContent);
+  
+links.innerHTML= "  <strong> Buy now : </strong></br> <a id='link1' target='_blank'>Amazon <i class='fa fa-amazon'></i> </a>  " 
+links2.innerHTML= "<a id='link2' target='_blank'>Apple books <i class='fa fa-apple'></i></a> " 
+document.getElementById("link1").href=link;
+document.getElementById("link2").href=link2;
 overlay.style.visibility='visible';
 overlay.style.opacity='1';
 };
