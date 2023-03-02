@@ -79,7 +79,7 @@ async function renderBooks() {
  // Playing with data api 
  // ForEach : pour selection tous l'api 
   y.results.books.forEach(api => {
-    ulElement = $('<ul  id="books-ln" class="cs-hidden"><li><div class="latest_box"> <div class="latest_b_img"></div><div class="latest_b_text"></div></div></li></ul>')
+    ulElement = $('<ul  class="books-ln" class="cs-hidden"><li><div class="latest_box"> <div class="latest_b_img"></div><div class="latest_b_text"></div></div></li></ul>')
     
     titleElement = $('<strong></strong>');
     if(api.title.length>15){
@@ -99,8 +99,6 @@ async function renderBooks() {
     imgElement = $('<img></img>');
     imgElement.attr("src",api.book_image);
     imgElement.attr("alt",api.title);
-    imgElement.css("width","200px");
-    imgElement.css("height","270px");
     imgElement.click(function() {
       handleclick(api.isbns[0].isbn13,api.title,api.book_image,api.author,api.description,api.buy_links[0].url,api.buy_links[1].url)
     });
