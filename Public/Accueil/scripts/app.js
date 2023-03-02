@@ -82,10 +82,19 @@ async function renderBooks() {
     ulElement = $('<ul  id="books-ln" class="cs-hidden"><li><div class="latest_box"> <div class="latest_b_img"></div><div class="latest_b_text"></div></div></li></ul>')
     
     titleElement = $('<strong></strong>');
-    titleElement.text(api.title);
+    if(api.title.length>15){
+      titleElement.text(api.title.substring(0,15)+"...");
+    }else{
+      titleElement.text(api.title);
+    }
+    
+    authorElement = $('<p class="authors"></p>');
 
-    authorElement = $('<p></p>');
-    authorElement.text(api.author);
+     if(api.author.length>17){
+       authorElement.text(api.author.substring(0,17)+"...");
+    }else{
+      authorElement.text(api.author);
+    }
 
     imgElement = $('<img></img>');
     imgElement.attr("src",api.book_image);

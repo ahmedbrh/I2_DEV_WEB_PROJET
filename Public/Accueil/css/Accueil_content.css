@@ -19,6 +19,10 @@ body {
   background-color: rgba(151, 151, 151, 0.03);
   
 }
+.authors{
+  height:20px;
+  overflow:hidden;
+}
 
 /*Showcase box  */
 #main {
