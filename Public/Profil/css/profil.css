@@ -21,3 +21,25 @@
   overflow: hidden;
   background-color: #f1f1f1;
 }
+
+.form-horizontal{
+   text-align: -webkit-center;
+   width:50%;
+   padding: 20px;
+   border: 5px ridge #E6DEDE;
+   border-radius: 12px;
+   margin: 22px 51px 30px 25%;
+   background-color:rgb(230, 222,222);
+}
+
+.btn-default{
+  margin:15px;
+   background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+}

@@ -7,6 +7,22 @@ const key = "n6RRK59oCG9F0PA8u0fG2vNvEuILEE9Z";
 const api_url = `https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=${key}`;
 
 
+
+const popupCloseListening = () =>{
+   let closeBtn = document.getElementsByClassName('close')[0]
+   var overlay=document.getElementsByClassName('overlay')[0]
+   
+  closeBtn.addEventListener("click",(e)=>{
+    clearInterval(currentIntervalId);
+    $("#favorite").prop( "checked", false );
+  });
+  overlay.addEventListener('click',(e)=>{
+    e.stopPropagation();
+    clearInterval(currentIntervalId);
+    $("#favorite").prop( "checked", false );
+  })
+  
+}
 //methode fetch 
 const getBooks = async () => {
   // fetcher l'api 
@@ -26,25 +42,30 @@ const getBooks = async () => {
 var currentIntervalId = "";
 var spinnerLoadingHtml = '<div id="loading-replies"><div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div></div>'
 function handleclick(isbn,title,img,auth,desc,link,link2){
-var popupTitle=document.getElementById('titlePop');
-var popupImage=document.getElementById('imgPop')
-var overlay=document.getElementsByClassName('overlay')[0]
-var popup=document.getElementsByClassName('popup')[0]
-var description=$('#description');
-var author=$('#authors');
-var links=document.getElementById('links');
-var links2=document.getElementById('links2');
-var idlivre=document.getElementById('isbn');
-var commentaires=document.getElementById('commentaryArea');
+  var popupTitle=document.getElementById('titlePop');
+  var popupImage=document.getElementById('imgPop')
+  var overlay=document.getElementsByClassName('overlay')[0]
+  var popup=document.getElementsByClassName('popup')[0]
+  var description=$('#description');
+  var author=$('#authors');
+  var links=document.getElementById('links');
+  var links2=document.getElementById('links2');
+  var commentaires = document.getElementById('commentaryArea');
+  var idlivre=document.getElementById('isbn');
+
+  //Insertion du spinner de chargement dans les commentaires en attendant le bon chargement de tout les données
   commentaires.innerHTML=spinnerLoadingHtml;
-  let closeBtn = document.getElementsByClassName('close')[0]
-  closeBtn.addEventListener("click",(e)=>{
-    clearInterval(currentIntervalId);
-});
-  overlay.addEventListener('click',(e)=>{
-    e.stopPropagation();
-clearInterval(currentIntervalId);
-})
+  
+  //Listener sur la fermeture du popup, arret de l'intervale qui recupere les commentaires periodiquement
+  popupCloseListening();
+
+  //Si l'icone du coeur est présente c'est qu'on est connecté alors ont verifie si le livre est favori pour afficher le coeur en noir
+  if(document.getElementById("favorite")){
+    initializeFavoriteIcon(isbn);
+  }
+
+  
+  // Récupération périodique des commentaires
   currentIntervalId = setInterval(()=>{
     $.post("/Services/commentaires.php?action=getReplies",{isbn:isbn+""}).done((d)=>{
     if(isbn==document.getElementById('isbn').value){
@@ -55,7 +76,6 @@ clearInterval(currentIntervalId);
 
 idlivre.value=isbn;
 
-console.log(idlivre.value);
 // fonction qui met les infos du livre dans popup
 popup.style.visibility='visible';
 popupTitle.innerText=title;

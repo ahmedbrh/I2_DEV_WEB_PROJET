@@ -1,17 +1,26 @@
-/*export default class Popup{
-constructor(isbn,title){
-this.isbn=isbn;
-this.commentaires=[]; //appel de la bdd
-this.title=title;
-}
+const initializeFavoriteIcon = async (isbn) => {
+  var favorite = $("#favorite");
+  $.ajax({
+  type: 'POST',
+  url: "/Services/book.php?action=isFavorite",
+  data: {isbn:isbn+""},
+  success: (d) => {
+    if(d.trim() == "true"){
+      favorite.prop( "checked", true );
+    }
+  },
+  async:false
+});
 
 }
-*/
 
+  $("#success-favorites-add").hide();
+  $("#success-favorites-remove").hide();
 let popup=document.getElementsByClassName('popup')[0]
 let closeBtn = document.getElementsByClassName('close')[0]
 let overlay=document.getElementsByClassName('overlay')[0]
 
+initializeFavoriteIcon();
 //une fonction qui permet de fermer le popup
 const closePopup = ()=>{
 
@@ -25,16 +34,35 @@ const closePopup = ()=>{
 //
 
 //close popup on click on close btn
-closeBtn.addEventListener('click',(e)=>{
+closeBtn.addEventListener('click', (e) => {
   closePopup();
 })
 //close popup on click anywhere out of popup
-overlay.addEventListener('click',(e)=>{
+overlay.addEventListener('click', (e) => {
   e.stopPropagation();
     closePopup();
 })
 
-function reinitializeCommentaryAndRate(){
+// on click on favorite button (heart)
+$('#favorite').click(()=>{
+  checked = $('#favorite').prop('checked')
+  console.log(checked)
+  if(checked){
+     $.post("/Services/book.php?action=addFavorite",{isbn:isbn.value+""}).done((d)=>{
+                $("#success-favorites-add").fadeTo(2000, 500).slideUp(500, function() {
+                  $("#success-favorites-add").slideUp(500);
+                });
+          });
+  }else{
+     $.post("/Services/book.php?action=removeFavorite",{isbn:isbn.value+""}).done((d)=>{
+            $("#success-favorites-remove").fadeTo(2000, 500).slideUp(500, function() {
+                  $("#success-favorites-remove").slideUp(500);
+                });
+     })
+  }
+})
+    
+function reinitializeCommentaryAndRate() {
   document.getElementById("commentaire").value="";
   document.querySelectorAll(".rating>input").forEach(r=>r.checked=false)
 }

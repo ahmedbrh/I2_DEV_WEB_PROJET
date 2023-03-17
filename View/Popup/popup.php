@@ -3,7 +3,9 @@
 </head>
 
 <body>
-
+<div  class="overlay"  >
+         
+         </div>
 	<div id="popup_container">
   <!--Bouton fermer -->
     <div id="popup_header">
@@ -26,6 +28,7 @@
 
 <!-- bloc information livre;auteur,description lien....-->
 <div id="informations">
+ 
   <input id="isbn" style="display: none;" name="isbn"></input> 
 <ul>
 <li id="authors"></li>
@@ -34,14 +37,23 @@
 <li id="links2"></li>
     <?php
     if(isset($_SESSION["user"])){
-      echo "<input hidden type='checkbox' id='favorite'><label for='favorite'>&#9825;</label>";
+       echo "<input hidden type='checkbox' id='favorite'><label for='favorite'>&#9825;</label>";
+
     }
 
   ?>
+      
 <ul>
-
-
+<div id="favorite-alerts">
+  <div class="alert alert-light" id="success-favorites-add">
+    Book have been <strong>added</strong> to your favorites.
+  </div>
+    <div class="alert alert-light" id="success-favorites-remove">
+    Book have been <strong>removed</strong> from your favorites.
+  </div>
 </div>
+</div>
+   
 <br>
 
   <!--Image du livre -->

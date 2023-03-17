@@ -20,13 +20,14 @@ class Commentaire extends Database{
   }
   public function get_book_replies($isbn){
     //replies = array();
-    $livres = $this->select("SELECT lvr_id from livre WHERE livre.lvr_isbn = :lvr_isbn", array("lvr_isbn"=>$isbn));
-    if(count($livres)>0){
-      $livre = $livres[0];
-      return $this->select("SELECT * from users_comments WHERE users_comments.lvr_id=:lvr_id",array("lvr_id"=>$livre["lvr_id"]));
-    }
+    return $this->select("
+SELECT users.usr_nom, users_comments.cmt_note, users_comments.cmt_date, users_comments.cmt_description from users_comments 
+INNER JOIN livre on livre.lvr_id = users_comments.lvr_id
+INNER JOIN users on users_comments.usr_id = users.usr_id
+WHERE livre.lvr_isbn=:lvr_isbn
+", array("lvr_isbn"=>$isbn));
 
-    return null;
+    
   } 
   
 

@@ -254,3 +254,13 @@ text-shadow:none;
   cursor:pointer;
   
 }
+#notif_container{
+   margin-right:30px;
+}
+svg.bi.bi-bell-fill{
+   position:absolute;
+  opacity:0;
+}
+#notif_container:hover > .bi-bell-fill{
+   opacity:1!important;
+}

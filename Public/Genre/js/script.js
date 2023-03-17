@@ -1,3 +1,4 @@
+
 $(document).ready(function() {
   let item, tile, author, publisher, bookLink, bookImg;
   let outputList = document.getElementById("list-output");

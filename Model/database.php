@@ -36,6 +36,13 @@ abstract class Database{
     $stmt->execute($parametres);
   
   }
+    public function delete($sql, $parametres){ 
+    $stmt = $this->_connexion->prepare($sql); 
+    // execute the insert statement
+    $stmt->execute($parametres);
+  
+  }
+  
 
   public function select($sql, $parametres) {
     $stmt = $this->_connexion->prepare($sql);

@@ -23,7 +23,7 @@
     <div id="IT_books"></div>
 
     <!--  section romance -->
-    <section id="latest">
+    <section class="latest">
       <h2 class="latest_heading">Romance</h2>
 
       <div id="romance">
@@ -32,7 +32,7 @@
     </section>
 
     <!-- sci-fiction -->
-    <section id="latest">
+    <section class="latest">
       <!-- section sci-fiction -->
       <h2 class="latest_heading">Sci-Fiction</h2>
 
@@ -41,7 +41,7 @@
       </div>
     </section>
     <!-- thriller -->
-    <section id="latest">
+    <section class="latest">
       <h2 class="latest_heading">Thriller</h2>
 
       <div id="thriller"></div>
@@ -50,15 +50,20 @@
 <!--  Manga ---> 
   </section>
     <!-- thriller -->
-    <section id="latest">
+    <section class="latest">
       <h2 class="latest_heading">Manga</h2>
 
       <div id="manga"></div>
     </section>
 
 
-
     
+     <div class="popup">
+      <?php include "Controller/popupController.php";
+      $popupController = new Popupcontroller();
+      $popupController->renderPopup();
+        ?>
+      </div>
   </body>
 
   <!-- Js Genre link -->

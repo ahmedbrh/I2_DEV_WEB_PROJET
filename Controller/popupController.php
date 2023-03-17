@@ -29,7 +29,7 @@ class PopupController {
     foreach($replies as $reply){
       $reply_date = date_create($reply["cmt_date"]);
       
-      $username = $userModel->get_username_by_id($reply["usr_id"]);
+      $username = $reply["usr_nom"];
        echo 
         "<div class='commentaire'>
             <div class='commentaireHeader'>
@@ -59,6 +59,28 @@ class PopupController {
     require_once("Model/comments.php");
     $commentsModal = new Commentaire();
     $commentsModal->create_reply($reply, $rate, $usr_id, $lvr_id);
+  }
+
+  function addFavorite($isbn) {
+    require_once("Model/book.php");
+    $bookModal = new Book();
+    $username = $_SESSION["user"];
+    $bookModal->addBookToFavorite($isbn, $username);
+    
+  }
+
+  function removeFavorite($isbn){
+    require_once("Model/book.php");
+    $bookModal = new Book();
+    $username = $_SESSION["user"];
+    $bookModal->removeBookToFavorite($isbn, $username);
+    
+  }
+  function isFavorite($isbn){
+    require_once("Model/book.php");
+    $bookModal = new Book();
+    $username = $_SESSION["user"];
+    return $bookModal->isFavorite($isbn, $username);
   }
 
 }

@@ -1,14 +1,121 @@
 
 
+let getUlBooks = (data) => {
+ ulElement = $('<ul  class="books-ln" class="cs-hidden"><li><div class="latest_box"> <div class="latest_b_img"></div><div class="latest_b_text"></div></div></li></ul>')
+  Object.values(data).forEach(api => {
+      let isbn = api.identifiers.isbn_13 ? api.identifiers.isbn_13[0] : api.identifiers.isbn_10[0]
+      
+      titleElement = $('<strong></strong>');
+      if(api.title.length>15){
+        titleElement.text(api.title.substring(0,15)+"...");
+      }else{
+        titleElement.text(api.title);
+      }
+      
+      authorElement = $('<p class="authors"></p>');
+  
+       if(api.authors[0]["name"].length>17){
+         authorElement.text(api.authors[0]["name"].substring(0,17)+"...");
+      }else{
+        authorElement.text(api.authors[0]["name"]);
+      }
+  
+      imgElement = $('<img></img>');
+      imgElement.attr("src",api.cover["medium"]);
+      imgElement.attr("alt",api.title);
+      imgElement.click(function() {
+        handleclick(isbn,api.title,api.cover["medium"],api.authors[0]["name"],"api.description","api.buy_links[0].url","api.buy_links[1].url")
+      });
+      ulElement.find(".latest_b_img").append(imgElement);
+      ulElement.find(".latest_b_text").append(titleElement);
+    ulElement.find(".latest_b_text").append(authorElement);
+      return ulElement;
+    });
+  return ulElement;
+} 
+const popupCloseListening = () =>{
+   let closeBtn = document.getElementsByClassName('close')[0]
+   var overlay=document.getElementsByClassName('overlay')[0]
+   
+  closeBtn.addEventListener("click",(e)=>{
+    clearInterval(currentIntervalId);
+    $("#favorite").prop( "checked", false );
+  });
+  overlay.addEventListener('click',(e)=>{
+    e.stopPropagation();
+    clearInterval(currentIntervalId);
+    $("#favorite").prop( "checked", false );
+  })
+  
+}
+function handleclick(isbn,title,img,auth,desc,link,link2){
+  var popupTitle=document.getElementById('titlePop');
+  var popupImage=document.getElementById('imgPop')
+  var overlay=document.getElementsByClassName('overlay')[0]
+  var popup=document.getElementsByClassName('popup')[0]
+  var description=$('#description');
+  var author=$('#authors');
+  var links=document.getElementById('links');
+  var links2=document.getElementById('links2');
+  var commentaires = document.getElementById('commentaryArea');
+  var idlivre=document.getElementById('isbn');
 
+  //Insertion du spinner de chargement dans les commentaires en attendant le bon chargement de tout les données
+  commentaires.innerHTML=spinnerLoadingHtml;
+  
+  //Listener sur la fermeture du popup, arret de l'intervale qui recupere les commentaires periodiquement
+  popupCloseListening();
+
+  //Si l'icone du coeur est présente c'est qu'on est connecté alors ont verifie si le livre est favori pour afficher le coeur en noir
+  if(document.getElementById("favorite")){
+    initializeFavoriteIcon(isbn);
+  }
+
+  
+  // Récupération périodique des commentaires
+  currentIntervalId = setInterval(()=>{
+    $.post("/Services/commentaires.php?action=getReplies",{isbn:isbn+""}).done((d)=>{
+    if(isbn==document.getElementById('isbn').value){
+    commentaires.innerHTML = d;
+    }
+  });
+  },5000);
+
+idlivre.value=isbn;
+
+// fonction qui met les infos du livre dans popup
+popup.style.visibility='visible';
+popupTitle.innerText=title;
+popupImage.src=img;
+
+  
+descriptionContent = $("<strong>Description: </strong>");
+spanDescriptionContent = $("<span></span>");
+  spanDescriptionContent.text(desc);
+description.html(descriptionContent)
+  description.append(spanDescriptionContent)
+
+  authorContent = $('<strong>Authors: </strong>');
+  spanAuthorContent = $("<span></span>");
+  spanAuthorContent.text(auth);
+  author.html(authorContent);
+  author.append(spanAuthorContent);
+  
+links.innerHTML= "  <strong> Buy now : </strong></br> <a id='link1' target='_blank'>Amazon <i class='fa fa-amazon'></i> </a>  " 
+links2.innerHTML= "<a id='link2' target='_blank'>Apple books <i class='fa fa-apple'></i></a> " 
+document.getElementById("link1").href=link;
+document.getElementById("link2").href=link2;
+overlay.style.visibility='visible';
+overlay.style.opacity='1';
+};
+    let science = $("#scifiction");
+  let romance = $("#romance");
+    let itBook = $('#IT_books');
+    let mangaBooks= $('#manga'); 
+  let thrillerBooks = $('#thriller');
+let kinds=[mangaBooks,science,romance,itBook,thrillerBooks]
 // section Genre
 
-//Html content pour sections
-let html = '';
-let html2 = '';
-let html3 = '';
-let html4 = '';
-let html5= '' ;
 
 
 async function renderGenre() {
@@ -35,130 +142,63 @@ async function renderGenre() {
 
 
 // select tout les api 
-
+  let dataMangas=[];
+  let dataRomance=[];
+  let dataIt=[];
+  let dataThriller=[];
+  let dataScifi=[];
   for (let i of isbnBooks) {
     let api_url = `https://openlibrary.org/api/books?bibkeys=ISBN:${i}&jscmd=data&format=json`;
-
-    const response = await fetch(api_url);
-    const data = await response.json(); 
-
-// Pour tester l'api 
-// console.log("title: " + data['ISBN:' + i].title);
-// console.log("image: " + data['ISBN:' + i]['cover']['large']);
-// console.log("Authors name: " + data['ISBN:' + i].authors[0]['name']);
-
-
-    let htmlSegmenet = ` <ul  id="Genre-ln" class="cs-hidden" >  <li class="item-a"> <div class="latest_box"> <div class="latest_b_img">  <a>    <img src=${data['ISBN:' + i]['cover']['large']} > </a></div>   <div class="latest_b_text"> <strong>${data['ISBN:' + i].title} </strong>  <p>${data['ISBN:' + i].authors[0]['name']} </p> </div> </div> </li> </ul>`;
-    // let htmlSegmenet = ` <li class="item-a"> <div class="latest_box"> <div class="latest_b_img">  <a>    <img src=${data['ISBN:' + i]['cover']['large']} > </a></div>   <div class="latest_b_text"> <strong>${data['ISBN:' + i].title} </strong>  <p>${data['ISBN:' + i].authors[0]['name']} </p> </div> </div> </li> `;
-    html += htmlSegmenet;
-
-
-
+    fetch(api_url).then(r=>r.json()).then(d=>{
+    ulRomance = getUlBooks(d);
+    romance.append(ulRomance);                 
+    })
+      
   }
 
 
   for (let y of isbnScifi) {
     let api_url = `https://openlibrary.org/api/books?bibkeys=ISBN:${y}&jscmd=data&format=json`;
-
-    const response = await fetch(api_url);
-    const data = await response.json();
-    // For test 
-// console.log(data);
-// console.log("title: " + data['ISBN:' + y].title);
-// console.log("image: " + data['ISBN:' + y]['cover']['large']);
-// console.log("Authors name: " + data['ISBN:' + y].authors[0]['name']);
-
- 
-    let htmlSegmenet2 = `<ul  id="Genre-ln" class="cs-hidden" >  <li class="item-a"> <div class="latest_box"> <div class="latest_b_img">  <a>    <img src=${data['ISBN:' + y]['cover']['large']} > </a></div>   <div class="latest_b_text"> <strong>${data['ISBN:' + y].title} </strong>  <p>${data['ISBN:' + y].authors[0]['name']} </p> </div> </div> </li> </ul> `;
-    //let htmlSegmenet2 = ` <li class="item-a"> <div class="latest_box"> <div class="latest_b_img">  <a>    <img src=${data['ISBN:' + y]['cover']['large']} > </a></div>   <div class="latest_b_text"> <strong>${data['ISBN:' + y].title} </strong>  <p>${data['ISBN:' + y].authors[0]['name']} </p> </div> </div> </li> `;
-    html2 += htmlSegmenet2;
-
-
-
+    fetch(api_url).then(r=>r.json()).then(d=>{
+      ulScience = getUlBooks(d);
+    science.append(ulScience);           
+    })
   }
   // ---------------------- IT section
   for (let x of isbnInfo) {
     let api_url = `https://openlibrary.org/api/books?bibkeys=ISBN:${x}&jscmd=data&format=json`;
-
-    const response = await fetch(api_url);
-    const data = await response.json();
-
-
-    // console.log("title: " + data['ISBN:' + x].title);
-    // console.log("image: " + data['ISBN:' + x]['cover']['large']);
-
-
-    // console.log("Authors name: " + data['ISBN:' + x].authors[0]['name']);
-
-
-    let htmlSegmenet3 = ` <ul  id="Genre-ln" class="cs-hidden" > <li class="item-a"> <div class="latest_box"> <div class="latest_b_img">  <a>    <img src=${data['ISBN:' + x]['cover']['large']} > </a></div>   <div class="latest_b_text"> <strong>${data['ISBN:' + x].title} </strong>  <p>${data['ISBN:' + x].authors[0]['name']} </p> </div> </div> </li> </ul>`;
-    html3 += htmlSegmenet3;
-
-
-
+    fetch(api_url).then(r=>r.json()).then(d=>{
+     ulInfo = getUlBooks(d);
+    itBook.append(ulInfo);                
+    })
   }
   // ----------------------Thriller section----------------
 
   for (let b of isbnThriller) {
     let api_url = `https://openlibrary.org/api/books?bibkeys=ISBN:${b}&jscmd=data&format=json`;
-
-    const response = await fetch(api_url);
-    const data = await response.json();
-
-
-    // console.log("title: " + data['ISBN:' + b].title);
-    // console.log("image: " + data['ISBN:' + b]['cover']['large']);
-
-
-    // console.log("Authors name: " + data['ISBN:' + b].authors[0]['name']);
-
-
-    let htmlSegmenet4 = ` <ul  id="Genre-ln" class="cs-hidden" > <li class="item-a"> <div class="latest_box"> <div class="latest_b_img">  <a>    <img src=${data['ISBN:' + b]['cover']['large']} > </a></div>   <div class="latest_b_text"> <strong>${data['ISBN:' + b].title} </strong>  <p>${data['ISBN:' + b].authors[0]['name']} </p> </div> </div> </li> </ul>`;
-    html4 += htmlSegmenet4;
-
-
-
+    fetch(api_url).then(r=>r.json()).then(d=>{
+    ulThriller = getUlBooks(d);
+    thrillerBooks.append(ulThriller);             
+    })
   }
-
-
-
 // ------------------Manga----------------------------- 
-
 
 for (let m of isbnManga) {
     let api_url = `https://openlibrary.org/api/books?bibkeys=ISBN:${m}&jscmd=data&format=json`;
-
-    const response = await fetch(api_url);
-    const data = await response.json();
-    // For test 
-// console.log(data);
-// console.log("title: " + data['ISBN:' + y].title);
-// console.log("image: " + data['ISBN:' + y]['cover']['large']);
-// console.log("Authors name: " + data['ISBN:' + y].authors[0]['name']);
-
- 
-    let htmlSegmenet5 = `<ul  id="Genre-ln" class="cs-hidden" >  <li class="item-a"> <div class="latest_box"> <div class="latest_b_img">  <a>    <img src=${data['ISBN:' + m]['cover']['large']} > </a></div>   <div class="latest_b_text"> <strong>${data['ISBN:' + m].title} </strong>  <p>${data['ISBN:' + m].authors[0]['name']} </p> </div> </div> </li> </ul> `;
-    //let htmlSegmenet2 = ` <li class="item-a"> <div class="latest_box"> <div class="latest_b_img">  <a>    <img src=${data['ISBN:' + y]['cover']['large']} > </a></div>   <div class="latest_b_text"> <strong>${data['ISBN:' + y].title} </strong>  <p>${data['ISBN:' + y].authors[0]['name']} </p> </div> </div> </li> `;
-    html5 += htmlSegmenet5;
-
-
-
+    fetch(api_url).then(r=>r.json()).then(d=>{
+    ulManga = getUlBooks(d);
+    mangaBooks.append(ulManga);          
+    })
   }
 
 
-    // Assignation des varibales 
-  let container = document.getElementById("romance");
-  container.innerHTML = html;
-  let science = document.getElementById("scifiction");
-  science.innerHTML = html2;
-  let itBook = document.getElementById('IT_books');
-  itBook.innerHTML = html3;
-  let thrillerBooks = document.getElementById('thriller');
-  thrillerBooks.innerHTML = html4;
 
-  let mangaBooks= document.getElementById('manga'); 
-  mangaBooks.innerHTML=html5;    
+
+
+
+
 }
+
 
 // appelle de la fonction renderGenre pour l'afficher dans la section  Genre
 

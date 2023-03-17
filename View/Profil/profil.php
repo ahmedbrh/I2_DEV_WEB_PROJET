@@ -20,7 +20,15 @@
     
 <button type="button" class="collapsible">Mes favoris</button>
     <div class="content">
-      <p></p>
+      <p>
+          <?php 
+          require_once("Controller/profilController.php");  
+          
+          $pc = new ProfilController();
+          $pc->getFavoris();
+
+          ?>
+      </p>
     </div>
     
 <button type="button" class="collapsible">Ajouter un ami</button>
@@ -30,13 +38,13 @@
      <div class ="form-group">
           <label class="control-label col-sm-2"> Email:</label>
               <div class ="col-sm-8">
-                    <input  type="email" class= "form-control" id="email"                            name="email">
+                    <input  type="email"  placeholder="Entrez l'email de l'utilisateur recherché" class= "form-control" id="email"                            name="email">
               </div>
       </div>
 
 <div class ="form-group">
     <div class ="col-sm-offset-2 col-sm-10">
-        <button type ="submit" name="demande" class="btn btn-default">Envoyer la demande</button>
+        <input type ="submit" name="demande" value="Envoyer la demande" class="btn-default">
     </div>
 </div>
 
@@ -45,7 +53,14 @@
     
 <button type="button" class="collapsible">Favoris de mes amis</button>
 <div class="content">
-  <p></p>
+  <p>
+
+    <?php        
+    
+          $pc->getFavorisAmis();
+    
+    ?>
+  </p>
 </div>
 
 <script>

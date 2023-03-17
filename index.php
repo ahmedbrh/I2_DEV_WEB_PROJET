@@ -64,8 +64,9 @@
       }
 			break;
 		case "genre":
-			require_once( "Controller/userController.php");
-			afficheGenre();
+			require_once( "Controller/genreController.php");
+			$genreController = new GenreController();
+      $genreController->renderGenre();
       break;
     case "aboutus":
 			require_once( "Controller/userController.php");

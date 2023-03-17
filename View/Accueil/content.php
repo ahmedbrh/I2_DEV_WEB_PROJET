@@ -145,14 +145,12 @@
  </section>
        <!-- ------------------------------------------------ popup Bootsrap -->
   
-       <div  class="overlay"  >
-         
-         </div>
+       
          <div class="popup">
       <?php include "Controller/popupController.php";
       $popupController = new Popupcontroller();
       $popupController->renderPopup();
-?>
+        ?>
       </div>
  
 

@@ -13,7 +13,7 @@
 <div id="signIn">
  
 <!--Creation du premier formulaire de connexion en utilisant bootstrap-->
-<div class="container" >
+<div class="container">
    <h2> Sign in </h2>
 <form class="form-horizontal" id="Formulaire-connexion" method="post">
      <div class ="form-group">
