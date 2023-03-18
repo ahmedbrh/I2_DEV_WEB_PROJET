@@ -24,7 +24,7 @@ let getUlBooks = (data) => {
       imgElement.attr("src",api.cover["medium"]);
       imgElement.attr("alt",api.title);
       imgElement.click(function() {
-        handleclick(isbn,api.title,api.cover["medium"],api.authors[0]["name"],"api.description","api.buy_links[0].url","api.buy_links[1].url")
+        openPopup(isbn,api.title,api.cover["medium"],api.authors[0]["name"],"api.description","api.buy_links[0].url","api.buy_links[1].url")
       });
       ulElement.find(".latest_b_img").append(imgElement);
       ulElement.find(".latest_b_text").append(titleElement);
@@ -33,81 +33,8 @@ let getUlBooks = (data) => {
     });
   return ulElement;
 } 
-const popupCloseListening = () =>{
-   let closeBtn = document.getElementsByClassName('close')[0]
-   var overlay=document.getElementsByClassName('overlay')[0]
-   
-  closeBtn.addEventListener("click",(e)=>{
-    clearInterval(currentIntervalId);
-    $("#favorite").prop( "checked", false );
-  });
-  overlay.addEventListener('click',(e)=>{
-    e.stopPropagation();
-    clearInterval(currentIntervalId);
-    $("#favorite").prop( "checked", false );
-  })
-  
-}
-function handleclick(isbn,title,img,auth,desc,link,link2){
-  var popupTitle=document.getElementById('titlePop');
-  var popupImage=document.getElementById('imgPop')
-  var overlay=document.getElementsByClassName('overlay')[0]
-  var popup=document.getElementsByClassName('popup')[0]
-  var description=$('#description');
-  var author=$('#authors');
-  var links=document.getElementById('links');
-  var links2=document.getElementById('links2');
-  var commentaires = document.getElementById('commentaryArea');
-  var idlivre=document.getElementById('isbn');
 
-  //Insertion du spinner de chargement dans les commentaires en attendant le bon chargement de tout les données
-  commentaires.innerHTML=spinnerLoadingHtml;
-  
-  //Listener sur la fermeture du popup, arret de l'intervale qui recupere les commentaires periodiquement
-  popupCloseListening();
 
-  //Si l'icone du coeur est présente c'est qu'on est connecté alors ont verifie si le livre est favori pour afficher le coeur en noir
-  if(document.getElementById("favorite")){
-    initializeFavoriteIcon(isbn);
-  }
-
-  
-  // Récupération périodique des commentaires
-  currentIntervalId = setInterval(()=>{
-    $.post("/Services/commentaires.php?action=getReplies",{isbn:isbn+""}).done((d)=>{
-    if(isbn==document.getElementById('isbn').value){
-    commentaires.innerHTML = d;
-    }
-  });
-  },5000);
-
-idlivre.value=isbn;
-
-// fonction qui met les infos du livre dans popup
-popup.style.visibility='visible';
-popupTitle.innerText=title;
-popupImage.src=img;
-
-  
-descriptionContent = $("<strong>Description: </strong>");
-spanDescriptionContent = $("<span></span>");
-  spanDescriptionContent.text(desc);
-description.html(descriptionContent)
-  description.append(spanDescriptionContent)
-
-  authorContent = $('<strong>Authors: </strong>');
-  spanAuthorContent = $("<span></span>");
-  spanAuthorContent.text(auth);
-  author.html(authorContent);
-  author.append(spanAuthorContent);
-  
-links.innerHTML= "  <strong> Buy now : </strong></br> <a id='link1' target='_blank'>Amazon <i class='fa fa-amazon'></i> </a>  " 
-links2.innerHTML= "<a id='link2' target='_blank'>Apple books <i class='fa fa-apple'></i></a> " 
-document.getElementById("link1").href=link;
-document.getElementById("link2").href=link2;
-overlay.style.visibility='visible';
-overlay.style.opacity='1';
-};
     let science = $("#scifiction");
   let romance = $("#romance");
     let itBook = $('#IT_books');

@@ -6,23 +6,6 @@
 const key = "n6RRK59oCG9F0PA8u0fG2vNvEuILEE9Z";
 const api_url = `https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=${key}`;
 
-
-
-const popupCloseListening = () =>{
-   let closeBtn = document.getElementsByClassName('close')[0]
-   var overlay=document.getElementsByClassName('overlay')[0]
-   
-  closeBtn.addEventListener("click",(e)=>{
-    clearInterval(currentIntervalId);
-    $("#favorite").prop( "checked", false );
-  });
-  overlay.addEventListener('click',(e)=>{
-    e.stopPropagation();
-    clearInterval(currentIntervalId);
-    $("#favorite").prop( "checked", false );
-  })
-  
-}
 //methode fetch 
 const getBooks = async () => {
   // fetcher l'api 
@@ -41,66 +24,7 @@ const getBooks = async () => {
 
 var currentIntervalId = "";
 var spinnerLoadingHtml = '<div id="loading-replies"><div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div></div>'
-function handleclick(isbn,title,img,auth,desc,link,link2){
-  var popupTitle=document.getElementById('titlePop');
-  var popupImage=document.getElementById('imgPop')
-  var overlay=document.getElementsByClassName('overlay')[0]
-  var popup=document.getElementsByClassName('popup')[0]
-  var description=$('#description');
-  var author=$('#authors');
-  var links=document.getElementById('links');
-  var links2=document.getElementById('links2');
-  var commentaires = document.getElementById('commentaryArea');
-  var idlivre=document.getElementById('isbn');
 
-  //Insertion du spinner de chargement dans les commentaires en attendant le bon chargement de tout les données
-  commentaires.innerHTML=spinnerLoadingHtml;
-  
-  //Listener sur la fermeture du popup, arret de l'intervale qui recupere les commentaires periodiquement
-  popupCloseListening();
-
-  //Si l'icone du coeur est présente c'est qu'on est connecté alors ont verifie si le livre est favori pour afficher le coeur en noir
-  if(document.getElementById("favorite")){
-    initializeFavoriteIcon(isbn);
-  }
-
-  
-  // Récupération périodique des commentaires
-  currentIntervalId = setInterval(()=>{
-    $.post("/Services/commentaires.php?action=getReplies",{isbn:isbn+""}).done((d)=>{
-    if(isbn==document.getElementById('isbn').value){
-    commentaires.innerHTML = d;
-    }
-  });
-  },5000);
-
-idlivre.value=isbn;
-
-// fonction qui met les infos du livre dans popup
-popup.style.visibility='visible';
-popupTitle.innerText=title;
-popupImage.src=img;
-
-  
-descriptionContent = $("<strong>Description: </strong>");
-spanDescriptionContent = $("<span></span>");
-  spanDescriptionContent.text(desc);
-description.html(descriptionContent)
-  description.append(spanDescriptionContent)
-
-  authorContent = $('<strong>Authors: </strong>');
-  spanAuthorContent = $("<span></span>");
-  spanAuthorContent.text(auth);
-  author.html(authorContent);
-  author.append(spanAuthorContent);
-  
-links.innerHTML= "  <strong> Buy now : </strong></br> <a id='link1' target='_blank'>Amazon <i class='fa fa-amazon'></i> </a>  " 
-links2.innerHTML= "<a id='link2' target='_blank'>Apple books <i class='fa fa-apple'></i></a> " 
-document.getElementById("link1").href=link;
-document.getElementById("link2").href=link2;
-overlay.style.visibility='visible';
-overlay.style.opacity='1';
-};
 // function pour render tous les livres section  TOPSellerbooks
 
 
@@ -133,31 +57,14 @@ async function renderBooks() {
     imgElement.attr("src",api.book_image);
     imgElement.attr("alt",api.title);
     imgElement.click(function() {
-      handleclick(api.isbns[0].isbn13,api.title,api.book_image,api.author,api.description,api.buy_links[0].url,api.buy_links[1].url)
+      openPopup(api.isbns[0].isbn13,api.title,api.book_image,api.author,api.description,api.buy_links[0].url,api.buy_links[1].url)
     });
     ulElement.find(".latest_b_img").append(imgElement);
     ulElement.find(".latest_b_text").append(titleElement);
   ulElement.find(".latest_b_text").append(authorElement);
     
-    /*let htmlSegmenet = `
-    <ul  id="books-ln" class="cs-hidden"> 
-      <li > 
-        <div class="latest_box"> 
-          <div class="latest_b_img">  
-     
-              <img src=${api.book_image} alt=${api.title}             onclick="handleclick(${api.isbns[0].isbn13},'${api.title}','${api.book_image}','${api.author}','${api.description}','${api.buy_links[0].url}','${api.buy_links[1].url}')" style="width:200px;height:270px;"/> 
-          </div>   
-          <div class="latest_b_text"> <strong> ${api.title} </strong>  <p>${api.author} </p> </div> 
-        </div> 
-      </li> 
-  </ul>`;
-    html += htmlSegmenet;*/
   $('.books_container').append(ulElement);
   });
-
-  /*let container = document.querySelector(".container");
-
-  container.innerHTML = html;*/
 
 }
 

@@ -1,5 +1,6 @@
 
 <head>
+   
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,7 @@
 <!--     
 <Script src="Public\Search\scripts\index.js"></Script>
     -->
-    <Script src="Public\Search\scripts\searchApi.js"></Script>
+   
 </head>
 <body>
     
@@ -32,6 +33,7 @@
       Search a book here 
       </h1>
 <!-- Search bar -->
+
         <div class="form-group">
         
           <input
@@ -43,16 +45,15 @@
 
       
           />
-        </div>
-    
-
-
- <input  id="enter" type = "button"  value = "submit">
+        
+ <button class="btn btn-dark" id="enter">Search</button>
     </div>
+             
   
 </div>
 </div>
 <div id="book-list"></div><br><br>
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="Public\Search\scripts\searchApi.js"></script>
 
 </body>
