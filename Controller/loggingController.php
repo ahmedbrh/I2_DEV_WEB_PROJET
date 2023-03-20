@@ -14,6 +14,12 @@ class LoggingController
   function handlePostInscription()
   {
     if (isset($_POST["inscription"])) {
+      $token = filter_input(INPUT_POST, 'token', FILTER_SANITIZE_STRING);
+      
+      if (!$token || $token !== $_SESSION['token']) {
+          echo "<div class='alert alert-danger' role='alert'>Methode non 
+autoriser</div>";
+      } else {
       $username = $_POST['username'];
       $mail = $_POST['email2'];
       $pass = $_POST['password2'];
@@ -48,23 +54,30 @@ class LoggingController
           }
         }
       }
+      }      
     }
   }
 
   function handlePostConnexion()
   {
-
     if (isset($_POST["connexion"])) {
-      $mail = $_POST['email1'];
-      $pass = $_POST['password1'];
-      require_once("Model/user.php");
-      $userModel = new User();
-      $username = $userModel->connect_user($mail, $pass); // returns username if null then mail or pass is invalid
-      if (isset($username)) {
-        $_SESSION["user"] = $username;
-        echo '<meta http-equiv="refresh" content="0;url=https://devwebi2.younessrihr.repl.co/?page=accueil">';
+      $token = filter_input(INPUT_POST, 'token', FILTER_SANITIZE_STRING);
+      
+      if (!$token || $token !== $_SESSION['token']) {
+          echo "<div class='alert alert-danger' role='alert'>Methode non 
+autoriser</div>";
       } else {
-        echo "<div class='alert alert-danger' role='alert'>Adresse email ou mot de passe invalide.</div>";
+        $mail = $_POST['email1'];
+        $pass = $_POST['password1'];
+        require_once("Model/user.php");
+        $userModel = new User();
+        $username = $userModel->connect_user($mail, $pass); // returns username if null then mail or pass is invalid
+        if (isset($username)) {
+          $_SESSION["user"] = $username;
+          echo '<meta http-equiv="refresh" content="0;url=https://devwebi2.younessrihr.repl.co/?page=accueil">';
+        } else {
+          echo "<div class='alert alert-danger' role='alert'>Adresse email ou mot de passe invalide.</div>";
+        }
       }
     }
   }

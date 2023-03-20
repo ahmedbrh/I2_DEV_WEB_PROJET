@@ -1,4 +1,6 @@
-
+<?php
+$_SESSION['token'] = md5(uniqid(mt_rand(), true));
+?>
 <html>
   <head>
 	<link href="Public/SignIn/css/SignIn_content.css" rel="stylesheet" type="text/css" />
@@ -30,6 +32,7 @@
         </div>
    
 </div>
+<input type="hidden" name="token" value="<?php echo $_SESSION['token'] ?? '' ?>">
 <button type ="submit" name="connexion" class="btn btn-dark">Submit</button>
 </form>
 
@@ -74,7 +77,7 @@
             <input  type="Password" class= "form-control" id="passwordconf" name="passwordconf">
         </div>
 </div>
-
+<input type="hidden" name="token" value="<?php echo $_SESSION['token'] ?? '' ?>">
 <div class ="form-group">
     <div class ="col-sm-offset-2 col-sm-6">
         <button name="inscription" type ="submit" onclick="" class="btn btn-dark btn-block">Submit</button>

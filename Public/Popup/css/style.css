@@ -223,6 +223,6 @@ margin-left:-22px;
 }
 
 #description{
-  overflow:scroll;
+  overflow-y:scroll;
   height:150px;
 }

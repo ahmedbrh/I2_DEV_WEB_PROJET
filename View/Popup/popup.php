@@ -1,3 +1,9 @@
+<?php 
+session_start();
+
+$_SESSION['token'] = md5(uniqid(mt_rand(), true));
+
+  ?>
 <head>
   <link href="Public/Popup/css/style.css" rel="stylesheet">
 </head>
@@ -82,6 +88,7 @@ if(isset($_SESSION["user"])){
 echo
     '<div class="container">
 <form id="replyForm" method="post">
+<input type="hidden" name="token" value="'.($_SESSION['token'] ?? "").'">
  <div class="form-group"> 
     <label for="comment">Add a comment:</label>
     <textarea  id="commentaire" !name="commentaire" class="form-control" id="comment" rows="3"   style="resize: none;"></textarea>
