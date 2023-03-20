@@ -20,15 +20,32 @@
     
 <button type="button" class="collapsible">Mes favoris</button>
     <div class="content">
+      <div class="livres">
       <p>
           <?php 
-          require_once("Controller/profilController.php");  
+         require_once("Model/profil.php");  
           
-          $pc = new ProfilController();
-          $pc->getFavoris();
+          $favoris= new ArrayObject();
+          $pc = new Profil();
+          $test=$pc->getFavoris("Anatole");
+          foreach($test as $isbn ){
+            $favoris->append($isbn["lvr_isbn"]);
+          }
 
+          foreach($favoris as $isbn ){
+    $json = file_get_contents('https://www.googleapis.com/books/v1/volumes?q=isbn:'.$isbn);
+
+$data = json_decode($json,true);
+
+$titre=$data['items'][0]['volumeInfo']['title'];
+$image_link=$data['items'][0]['volumeInfo']['imageLinks']['smallThumbnail'];
+
+            echo "<div class='livre'>".$titre."<br>";
+            echo "<img src=".$image_link." alt='premiere de couverture'></div>";
+          }
           ?>
       </p>
+      </div>
     </div>
     
 <button type="button" class="collapsible">Ajouter un ami</button>
@@ -57,7 +74,7 @@
 
     <?php        
     
-          $pc->getFavorisAmis();
+          //$pc->getFavorisAmis();
     
     ?>
   </p>

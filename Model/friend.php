@@ -15,8 +15,7 @@ where usr.usr_id = (
 	from user_friend usrf
 	inner join users usr on usrf.usr_id_2 = usr.usr_id
 	where usrf.friend_accepted = false
-	and usr.usr_nom = :user
-)";
+	and usr.usr_nom = :user)";
     return $this->select($sql, ["user" => $username]);
   }
 
@@ -32,4 +31,6 @@ where usr.usr_id = (
 )";
     return $this->select($sql, ["user" => $username]);
   }
-}  ?>
+}
+                                                                                     
+?>

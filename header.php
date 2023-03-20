@@ -4,7 +4,7 @@
   <meta name="X-UA-Compatible" content="IE-edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="header.css" rel="stylesheet" type="text/css" />
-
+  <link href="Public/Header/notif.css" rel="stylesheet" type="text/css" />
   <!--font awsome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   
@@ -12,7 +12,6 @@
   <!-- google fonts -->  
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <script src="Public\Header\js\notif.js"></script>
   </head>
 	<body>
 
@@ -58,11 +57,14 @@ if ( !isset( $_SESSION['user'] )) {
           $friend = $friendClasse->get_not_accepted_friend($_SESSION['user']);
 
 
-        
+       
 echo 
   
 "<div class='header_connect' style='display:flex; align-items:center;'>
 <div id='notif_container'>
+<div id='myDropdown' class='dropdown-content'>
+
+  </div>
 <svg xmlns='http://www.w3.org/2000/svg' width='30' height='30' fill='currentColor' class='bi bi-bell-fill' viewBox='0 0 16 16'>
   <path d='M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z'/>
 </svg>
@@ -107,5 +109,7 @@ echo
   })
 
 </script>
+  
+      <script src="Public/Header/js/notif.js"></script>
 </html>
 

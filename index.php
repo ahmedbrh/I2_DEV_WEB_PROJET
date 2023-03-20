@@ -55,8 +55,9 @@
       break;
 		case "logging" :
       if (isset($_SESSION["user"]) && !isset($_POST["deconnexion"])){
-        require_once( "Controller/userController.php");
-			 afficheAccueil();
+        			require_once("Controller/homeController.php") ;
+    			$homeController = new HomeController();
+          $homeController->renderHome();
       }else{
         require_once( "Controller/loggingController.php");
   			$logController = new LoggingController();
@@ -69,13 +70,16 @@
       $genreController->renderGenre();
       break;
     case "aboutus":
-			require_once( "Controller/userController.php");
-			afficheAboutus();
+			require_once( "Controller/aboutusController.php");
+			  $aboutusController = new AboutusController();
+        $aboutusController->renderAboutus();
       break;
 	  case "search":
-		require_once(  "Controller/userController.php");
-		 afficherSearch();
-		 break;
+        require_once("Controller/searchController.php");
+        $searchController = new SearchController();
+        $searchController->renderSearch();
+      break;
+		
 	}
 	?>
  <footer>

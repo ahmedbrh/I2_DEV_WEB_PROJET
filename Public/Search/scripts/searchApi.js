@@ -6,6 +6,7 @@ let renderBook = (data, container) => {
       let bookTitle = data.volumeInfo.title
     let bookAuthors = data.volumeInfo.authors
     let bookImage = data.volumeInfo.imageLinks.medium
+  let bookDescription = data.volumeInfo.description
       titleElement = $('<strong></strong>');
       if(bookTitle.length>15){
         titleElement.text(bookTitle.substring(0,15)+"...");
@@ -25,7 +26,7 @@ let renderBook = (data, container) => {
       imgElement.attr("src",bookImage);
       imgElement.attr("alt",bookTitle);
       imgElement.click(function() {
-        openPopup(isbn,bookTitle,bookImage,bookAuthors[0],"api.description","api.buy_links[0].url","api.buy_links[1].url")
+        openPopup(isbn,bookTitle,bookImage,bookAuthors[0],bookDescription,"api.buy_links[0].url","api.buy_links[1].url")
       });
       ulElement.find(".latest_b_img").append(imgElement);
       ulElement.find(".latest_b_text").append(titleElement);
@@ -38,7 +39,7 @@ let renderBook = (data, container) => {
 var query = ''
 var URL = ''
 
-googleapikey = "AIzaSyBywUVAvQ9dw6Nmhzlwlv-EZyaf8lbZ7GQ"
+gk = "AIzaSyBywUVAvQ9dw6Nmhzlwlv-EZyaf8lbZ7GQ"
 let clearPrevious = () =>{
   $("#book-list").html("");
 }
@@ -46,7 +47,7 @@ let clearPrevious = () =>{
 
 async function getAndShowBookData(volumeId){
   booksContainer = $("#book-list")
-  url=`https://www.googleapis.com/books/v1/volumes/${volumeId}?key=${googleapikey}`
+  url=`https://www.googleapis.com/books/v1/volumes/${volumeId}?key=${gk}`
   $.ajax({
       url: url.toString(),
       dataType: 'json',

@@ -150,7 +150,7 @@ popupImage.src=img;
   
 descriptionContent = $("<strong>Description: </strong>");
 spanDescriptionContent = $("<span></span>");
-  spanDescriptionContent.text(desc);
+  spanDescriptionContent.html(desc);
 description.html(descriptionContent)
   description.append(spanDescriptionContent)
 

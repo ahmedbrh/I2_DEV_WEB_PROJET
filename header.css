@@ -264,3 +264,6 @@ svg.bi.bi-bell-fill{
 #notif_container:hover > .bi-bell-fill{
    opacity:1!important;
 }
+.showBell{
+  opacity:1!important;
+}

@@ -107,6 +107,7 @@ align-items:center;
 
 #informations{
 margin-left:-22px;
+  width:50%;
 }
 
 #replyForm{
@@ -219,4 +220,9 @@ margin-left:-22px;
 }
 #favorite-alerts{
   position:absolute;
+}
+
+#description{
+  overflow:scroll;
+  height:150px;
 }

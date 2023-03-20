@@ -23,7 +23,7 @@ switch ($action){
     }
   break;
   case "isFavorite":
-    if(isset($_POST["isbn"])){
+    if(isset($_POST["isbn"]) && isset($_SESSION["user"])){
       chdir("../");
       require_once('Controller/popupController.php');
       $popupController = new PopupController();
